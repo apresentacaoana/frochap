@@ -91,7 +91,8 @@ export default function Home() {
       if(data.status == 'approved') {
         await updateUser(user.docId, {
           plan: plano,
-          subscription_date: moment(new Date()).format("DD/MM/YYYY")
+          subscription_date: moment(new Date()).format("DD/MM/YYYY"),
+          litros: user.litros + Number(plano.litros.replace(',', '.'))
         })
       }
       router.push(`/result/${data.id}`)
@@ -102,7 +103,11 @@ export default function Home() {
   return (
     <>
     
-    {loading ? <div>carregado</div> : 
+    {loading ? (
+      <p className='absolute font-bold top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+        Carregando
+      </p>
+    ) : 
     
       (
         <>
