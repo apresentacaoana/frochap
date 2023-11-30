@@ -22,6 +22,7 @@ const ChangePassword = () => {
         setAlerta("")
         if(!password || !newPassword) return setAlerta("Preencha todos os campos")
         if(password != newPassword) return setAlerta("As senhas precisam ser iguais")
+        setAlerta("Pronto! A senha da conta acaba de ser alterada")
         await updateUser(user.docId, {
     
             senha: password

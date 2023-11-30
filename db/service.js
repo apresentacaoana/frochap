@@ -80,10 +80,10 @@ const entrarComGoogle = async (lat, long, role = "normal") => {
 const getUserByEmail = async (email) => {
     try {
         const usersRef = collection(db, "users")
-        const docs = await getDocs(query(usersRef, where("email", "==", email)))
+        const docs = await getDocs(query(usersRef, where("id", "==", email)))
         let response;
         docs.forEach((doc) => {
-            if(doc.data().email == email) {
+            if(doc.data().id == email) {
                 response = {
                     ...doc.data(),
                     docId: doc.id
