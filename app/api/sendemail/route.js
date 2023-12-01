@@ -20,6 +20,7 @@ export async function POST(request) {
 
         if(sendType == "confirm") {
             let responseUser = await getUserByEmail(email)
+            console.log(responseUser)
             let emailOptions = {
                 from: "alexfernando.contact@gmail.com",
                 to: responseUser.email,
@@ -38,11 +39,12 @@ export async function POST(request) {
 
         } else if (sendType == 'change') {
             let responseUser = await getUserByEmail(email)
+            console.log(responseUser)
             let emailOptions = {
                 from: "alexfernando.contact@gmail.com",
                 to: responseUser.email,
                 subject: "Redefinir Senha - Postos Kotinski",
-                text: `<a href="https://frochap.vercel.app/changepassword?email=${responseUser.id}">Clique aqui</a> para redefinir a senha.`
+                html: `<a href="https://frochap.vercel.app/changepassword?email=${responseUser.id}">Clique aqui</a> para redefinir a senha.`
             }
 
             transporter.sendMail(emailOptions, function(error, info){
