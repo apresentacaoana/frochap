@@ -7,21 +7,24 @@ import nodemailer from 'nodemailer'
 export async function POST(request) {
     const { email, nome, sendType } = await request.json();
     const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: "etsudot@gmail.com",
-            pass: "Herbert!23"
-        }
-    })
+      service: "gmail",
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+          user: "alexfernando.contact@gmail.com",
+          pass: "murk hocx nztr vgtr"
+      }
+    })  
     try {
 
         if(sendType == "confirm") {
             let responseUser = await getUserByEmail(email)
             let emailOptions = {
-                from: "alexfernandorochadealmeida@gmail.com",
+                from: "alexfernando.contact@gmail.com",
                 to: responseUser.email,
                 subject: "Ative sua conta - Postos Kotinski",
-                text: `<a href="https://frochap.vercel.app/confirm?email=${responseUser.id}">Clique aqui</a> para ativar a sua conta.`
+                html: `<a href="https://frochap.vercel.app/confirm?email=${responseUser.id}">Clique aqui</a> para ativar a sua conta.`
             }
 
             transporter.sendMail(emailOptions, function(error, info){
@@ -36,7 +39,7 @@ export async function POST(request) {
         } else if (sendType == 'change') {
             let responseUser = await getUserByEmail(email)
             let emailOptions = {
-                from: "alexfernandorochadealmeida@gmail.com",
+                from: "alexfernando.contact@gmail.com",
                 to: responseUser.email,
                 subject: "Redefinir Senha - Postos Kotinski",
                 text: `<a href="https://frochap.vercel.app/changepassword?email=${responseUser.id}">Clique aqui</a> para redefinir a senha.`
