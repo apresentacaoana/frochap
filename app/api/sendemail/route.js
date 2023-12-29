@@ -2,58 +2,39 @@ import { processOrder } from "@/app/actions/mp";
 import { getUserByEmail } from "@/db/service";
 import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 import { NextResponse } from "next/server";
-import nodemailer from 'nodemailer'
+import { MailtrapClient } from "mailtrap"
 
 export async function POST(request) {
     const { email, nome, sendType } = await request.json();
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-          user: "alexfernando.contact@gmail.com",
-          pass: "murk hocx nztr vgtr"
-      }
-    })  
+    const client = new MailtrapClient({token: "4da6355915b6d910379194985c7fcdb8"})
+    const sender = {name: "Postos Kotinski", email: "mailtrap@amane.com.br"}
     try {
 
         if(sendType == "confirm") {
             let responseUser = await getUserByEmail(email)
             console.log(responseUser)
-            let emailOptions = {
-                from: "alexfernando.contact@gmail.com",
-                to: responseUser.email,
-                subject: "Ative sua conta - Postos Kotinski",
-                html: `<a href="https://frochap.vercel.app/confirm?email=${responseUser.id}">Clique aqui</a> para ativar a sua conta.`
-            }
 
-            transporter.sendMail(emailOptions, function(error, info){
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('Email sent: ' + info.response);
-                }
-              });
+            client.send({
+              from: sender,
+              to: [{email: responseUser.email}],
+              subject: "Confirme sua Conta - Postos Kotinski",
+              html: `<a href="https://frochap.vercel.app/confirm?email=${responseUser.id}">Clique aqui</a> para ativar a sua conta.`
+            })
+
+
+
             return NextResponse.json({message: "Email de confirmação enviado"});
 
         } else if (sendType == 'change') {
             let responseUser = await getUserByEmail(email)
-            console.log(responseUser)
-            let emailOptions = {
-                from: "alexfernando.contact@gmail.com",
-                to: responseUser.email,
-                subject: "Redefinir Senha - Postos Kotinski",
-                html: `<a href="https://frochap.vercel.app/changepassword?email=${responseUser.id}">Clique aqui</a> para redefinir a senha.`
-            }
 
-            transporter.sendMail(emailOptions, function(error, info){
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('Email sent: ' + info.response);
-                }
-              });
+
+            client.send({
+              from: sender,
+              to: [{email: responseUser.email}],
+              subject: "Redefina sua Senha - Postos Kotinski",
+              html: `<a href="https://frochap.vercel.app/changepassword?email=${responseUser.id}">Clique aqui</a> para redefinir a senha.`
+            })
 
             if(responseUser) {
                 return NextResponse.json({message: "Email de confirmação enviado"});
