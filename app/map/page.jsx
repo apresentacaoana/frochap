@@ -5,21 +5,25 @@ import React, { useEffect, useState } from 'react'
 
 const Intro = () => {
   const searchParams = useSearchParams()
-  const {lat1, lng1, lat2, lng2} = searchParams
+  const lat1 = searchParams.get('lat1')
+  const lng1 = searchParams.get('lng1')
   return (
     <div className='h-screen w-full'>
       <APIProvider
         apiKey='AIzaSyAJsQjlna7aQk-7UPb-h4H0v1holCNxIno'
       >
-        <Map defaultCenter={{lat: lat1, lng: lng1}} defaultZoom={17} >
-          <Directions />
+        <Map defaultCenter={{lat: lat1, lng: lng1}} defaultZoom={18} >
+          <Directions lat1={lat1} lng1={lng1} />
         </Map>
       </APIProvider>
     </div>
   )
 }
 
-function Directions() {
+function Directions({ lat1, lng1 }) {
+  const searchParams = useSearchParams()
+  const lat2 = searchParams.get('lat2')
+  const lng2 = searchParams.get('lng2')
   const map = useMap()
   const routesLibrary = useMapsLibrary('routes')
   const [directionsService, setDirectionsService] = useState()
@@ -27,13 +31,13 @@ function Directions() {
   const [routes, setRoutes] = useState([])
 
   useEffect(() => {
-    if(!routesLibrary || !map) return;
+    if (!lat2 || !lng2 || !routesLibrary || !map) return;
     setDirectionsService(new routesLibrary.DirectionsService())
     setDirectionsRenderer(new routesLibrary.DirectionsRenderer({ map }))
-  }, [routesLibrary, map])
+  }, [lat2, lng2, routesLibrary, map])
 
   useEffect(() => {
-    if(!directionsService || !directionsRenderer) return;
+    if (!lat1 || !lat2 || !lng1 || !lng2 || !directionsService || !directionsRenderer) return;
     directionsService.route({
       origin: new google.maps.LatLng(lat2, lng2),
       destination: new google.maps.LatLng(lat1, lng1),
@@ -42,8 +46,7 @@ function Directions() {
       console.log(response)
       directionsRenderer.setDirections(response)
     })
-  }, [directionsService, directionsRenderer])
-
+  }, [lat1, lat2, lng1, lng2, directionsService, directionsRenderer])
 
   return null
 }
