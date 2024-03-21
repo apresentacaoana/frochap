@@ -26,7 +26,7 @@ const ConfirmPage = () => {
             {
                 user ? (
                     <div className="rounded-[10px] w-full bg-black p-4">
-                        <p className="text-whitefont-bold">Sua conta foi confirmada!</p> Já pode retornar ao aplicativo
+                        <p className="text-white font-bold">Sua conta foi confirmada!</p> Já pode retornar ao aplicativo
                     </div>
                 ) : (
                     <div className="rounded-[10px] w-full bg-black p-4">
