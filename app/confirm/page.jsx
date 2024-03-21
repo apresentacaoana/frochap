@@ -21,16 +21,16 @@ const ConfirmPage = () => {
     }, [])
 
     return (
-        <div className="h-[100vh] p-7 w-full bg-[#0d0d0d]">
-            <p className="text-[32px] text-orange-400 font-bold mb-3">Verificação de Email</p>
+        <div className="h-[100vh] p-7 w-full bg-white">
+            <p className="text-[32px] text-black font-bold mb-3">Verificação de Email</p>
             {
                 user ? (
-                    <div className="rounded-[10px] w-full bg-orange-400 p-4">
-                        <p className="text-black font-bold">Sua conta foi confirmada!</p> Já pode retornar ao aplicativo
+                    <div className="rounded-[10px] w-full bg-black p-4">
+                        <p className="text-whitefont-bold">Sua conta foi confirmada!</p> Já pode retornar ao aplicativo
                     </div>
                 ) : (
-                    <div className="rounded-[10px] w-full bg-orange-400 p-4">
-                        <p className="text-black font-bold">Conta não encontrada</p> Refaça o processo de verificação e solicite um novo email
+                    <div className="rounded-[10px] w-full bg-black p-4">
+                        <p className="text-white font-bold">Conta não encontrada</p> Refaça o processo de verificação e solicite um novo email
                     </div>
                 )
             }

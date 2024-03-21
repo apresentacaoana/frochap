@@ -10,10 +10,9 @@ export async function POST(request) {
     const sender = {name: "Postos Kotinski", email: "kotinski@amane.com.br"}
     const resend = new Resend("re_CravZWzR_HFeUJM8WzSkYiZ2yZhmESv3L")
     try {
-
         if(sendType == "confirm") {
             let responseUser = await getUserByEmail(email)
-
+            console.log(responseUser)
             resend.emails.send({
                 from: sender.email,
                 to: responseUser.email,
