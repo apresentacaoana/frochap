@@ -22,14 +22,14 @@ const ConfirmPage = () => {
 
     return (
         <div className="h-[100vh] p-7 w-full bg-white">
-            <p className="text-[32px] text-black font-bold mb-3">Verificação de Email</p>
+            <p className="text-[32px] text-[#0f0d3c] font-bold mb-3">Verificação de Email</p>
             {
                 user ? (
-                    <div className="rounded-[10px] w-full bg-black p-4">
+                    <div className="rounded-[10px] w-full bg-[#0f0d3c] p-4">
                         <p className="text-white font-bold">Sua conta foi confirmada!</p> Já pode retornar ao aplicativo
                     </div>
                 ) : (
-                    <div className="rounded-[10px] w-full bg-black p-4">
+                    <div className="rounded-[10px] w-full text-white bg-[#0f0d3c] p-4">
                         <p className="text-white font-bold">Conta não encontrada</p> Refaça o processo de verificação e solicite um novo email
                     </div>
                 )

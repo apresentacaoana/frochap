@@ -31,39 +31,39 @@ const ChangePassword = () => {
     }
     return (
         <div className="h-[100vh] p-7 w-full bg-white">
-            <p className="text-[32px] text-blacj font-bold mb-3">Redefinir senha</p>
+            <p className="text-[32px] text-[#0f0d3c] font-bold mb-3">Redefinir senha</p>
             {alerta && (
-                <div className="rounded-[10px] mb-3 w-full bg-black p-4">
+                <div className="rounded-[10px] mb-3 w-full bg-[#0f0d3c] p-4">
                     <p className="text-white font-bold">{alerta}</p>
                 </div>
             )}
-            <div className="mb-[12px] text-black">
-                <p className="text-[16px] text-black font-normal my-[8px]">
+            <div className="mb-[12px] text-[#0f0d3c]">
+                <p className="text-[16px] text-[#0f0d3c] font-normal my-[8px]">
                     Nova senha
                 </p>
-                <div className="w-full h-[48px] flex border border-black rounded-[8px] items-center justify-center pl-[22px]">
+                <div className="w-full h-[48px] flex border border-[#0f0d3c] rounded-[8px] items-center justify-center pl-[22px]">
                     <input 
                         value={password}
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full text-black outline-none bg-transparent"
+                        className="w-full text-[#0f0d3c] outline-none bg-transparent"
                     />
                 </div>
             </div>
-            <div className="mb-[32px] text-black">
-                <p className="text-[16px] text-black font-normal my-[8px]">
+            <div className="mb-[32px] text-[#0f0d3c]">
+                <p className="text-[16px] text-[#0f0d3c] font-normal my-[8px]">
                     Repetir nova senha
                 </p>
-                <div className="w-full h-[48px] flex border border-black rounded-[8px] items-center justify-center pl-[22px]">
+                <div className="w-full h-[48px] flex border border-[#0f0d3c] rounded-[8px] items-center justify-center pl-[22px]">
                     <input 
                         value={newPassword}
                         type="password"
                         onChange={(e) => setNewPassword(e.target.value)}
-                        className="w-full text-black outline-none bg-transparent"
+                        className="w-full text-[#0f0d3c] outline-none bg-transparent"
                     />
                 </div>
             </div>
-            <div onClick={handleSubmit} className="text-white hover:bg-gray-900 bg-black rounded-[10px] p-4 text-center">
+            <div onClick={handleSubmit} className="text-white hover:bg-gray-900 bg-[#0f0d3c] rounded-[10px] p-4 text-center">
                 <p className="text-center">Confirmar</p>
             </div>
         </div>
